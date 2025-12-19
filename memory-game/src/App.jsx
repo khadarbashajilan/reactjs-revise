@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
 import GameHeader from "./components/GameHeader";
 import "./index.css";
 import Card from "./components/Card";
+import Winmessage from "./components/Winmessage";
+import { ueseGameLogic } from "./hooks/useGamelogics";
 
 const cardValues = [
   "🍎",
@@ -23,76 +24,11 @@ const cardValues = [
 ];
 
 function App() {
-  const [cards, setCards] = useState([]);
-  const [flippedCards, setflippedCards] = useState([]);
-  const [matchedCards, setmatchedCards] = useState([])
-
-  // let [cards, setCards] = useState()
-  const initializeGame = () => {
-    const finalCards = cardValues.map((value, index) => ({
-      idx: index,
-      value,
-      isFlipped: false,
-      isMatched: false,
-    }));
-    setCards(finalCards);
-  };
-
-  useEffect(() => {
-    initializeGame();
-  }, []);
-
-  const handleCardClick = (card) => {
-    if (card.isFlipped || card.isMatched) {
-      return;
-    }
-    const newCards = cards.map((c) => {
-      if (c.idx === card.idx) {
-        return { ...c, isFlipped: true };
-      } else {
-        return c;
-      }
-    });
-    setCards(newCards);
-
-    const newFlippedcards = [...flippedCards, card.idx];
-    setflippedCards(newFlippedcards);
-
-    if (flippedCards.length === 1) {
-      const firstCard = cards[flippedCards[0]];
-      if (card.value === firstCard.value) {
-
-        setmatchedCards((prev)=> [...prev, firstCard.idx, card.idx])
-
-        setTimeout(() => {
-          setCards((prev)=>
-          prev.map((c)=>{
-            if(c.idx === firstCard.idx || c.idx === card.idx){
-              return {...c, isMatched: true}
-            }else{
-              return c
-            }
-          }))
-          setflippedCards([])
-        }, 500);
-
-      } else {
-        setTimeout(() => {
-          const flippedBackCards = newCards.map((c) => {
-            return newFlippedcards.includes(c.idx) || c.idx === card.idx
-              ? { ...c, isFlipped: false }
-              : c;
-          });
-          setCards(flippedBackCards);
-          setflippedCards([])
-        }, 1000);
-      }
-    }
-  };
-
+  const {score, moves, initializeGame, handleCardClick, matchedCards, cards} = ueseGameLogic(cardValues)
   return (
     <div className="app">
-      <GameHeader score={0} moves={0} onReset={initializeGame} />
+      <GameHeader score={score} moves={moves} onReset={initializeGame} />
+      {matchedCards.length === cardValues.length && <Winmessage moves={moves}/>} 
 
       <div className="cards-grid">
         {cards.map((card) => {
