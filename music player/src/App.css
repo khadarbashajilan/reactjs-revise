@@ -1,51 +1,43 @@
-@import "tailwindcss";
-/* Add these classes to your existing Tailwind setup or create a new CSS file */
-
-/* Root variables and base styles */
 :root {
-  --progress: 0%;
+  font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@layer base {
-  body {
-    @apply font-['Inter',system-ui,'Avenir','Helvetica','Arial',sans-serif] leading-[1.5] font-normal text-[rgba(255,255,255,0.87)] antialiased;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    font-synthesis: none;
-  }
-
-  * {
-    @apply box-border;
-  }
-
-  body {
-    @apply m-0 min-w-[320px] min-h-screen;
-  }
+* {
+  box-sizing: border-box;
 }
 
-/* Animation */
-@keyframes gradientShift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
-/* App container */
 .app {
-  @apply max-w-300 mx-auto p-8 min-h-screen;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
 }
 
-/* App header */
 .app-header {
-  @apply text-center mb-12;
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
 .app-header h1 {
-  @apply text-[3.5rem] font-bold m-0;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0;
   background: linear-gradient(45deg, #10b981, #059669, #047857);
   background-size: 200% 200%;
   -webkit-background-clip: text;
@@ -55,50 +47,140 @@
 }
 
 .app-header p {
-  @apply text-[1.2rem] text-[rgba(255,255,255,0.7)] m-[0.5rem_0_0_0];
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0.5rem 0 0 0;
 }
 
-/* App main layout */
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 .app-main {
-  @apply grid grid-cols-2 gap-8 items-start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
 }
 
-/* Content sections */
 .content-section {
-  @apply bg-[rgba(255,255,255,0.1)] backdrop-blur-xl rounded-3xl p-8 border border-[rgba(255,255,255,0.2)];
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   max-height: 600px;
   overflow-y: auto;
 }
 
-/* Music Player */
+@media (max-width: 768px) {
+  .app-main {
+    grid-template-columns: 1fr;
+  }
+
+  .app-header h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Music Player Styles */
 .music-player {
-  @apply bg-[rgba(255,255,255,0.1)] backdrop-blur-xl rounded-3xl p-8 border border-[rgba(255,255,255,0.2)];
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .track-info {
-  @apply text-center mb-8;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .track-title {
-  @apply text-[1.5rem] font-semibold mb-2 text-white m-0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: white;
 }
 
 .track-artist {
-  @apply text-base text-[rgba(255,255,255,0.7)] m-0;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
 }
 
 .progress-container {
-  @apply flex items-center gap-4 mb-8;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .time {
-  @apply text-[0.9rem] text-[rgba(255,255,255,0.8)] min-w-[3rem] text-center;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  min-width: 3rem;
+  text-align: center;
 }
 
 .progress-bar {
-  @apply flex-1 h-1.5 bg-[rgba(255,255,255,0.2)] rounded cursor-pointer appearance-none outline-none;
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+}
+
+.progress-bar::-webkit-slider-track {
+  background: rgba(255, 255, 255, 0.2);
+  height: 6px;
+  border-radius: 3px;
+}
+
+.progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #10b981;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.progress-bar::-moz-range-track {
+  background: rgba(255, 255, 255, 0.2);
+  height: 6px;
+  border-radius: 3px;
+  border: none;
+}
+
+.progress-bar::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #10b981;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Progress bar fill effect */
+.progress-bar {
   background: linear-gradient(
     to right,
     #10b981 0%,
@@ -108,41 +190,39 @@
   );
 }
 
-.progress-bar::-webkit-slider-track {
-  @apply bg-[rgba(255,255,255,0.2)] h-1.5 rounded;
-}
-
-.progress-bar::-webkit-slider-thumb {
-  @apply appearance-none w-4 h-4 bg-emerald-500 rounded-full cursor-pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-.progress-bar::-moz-range-track {
-  @apply bg-[rgba(255,255,255,0.2)] h-1.5 rounded border-none;
-}
-
-.progress-bar::-moz-range-thumb {
-  @apply w-4 h-4 bg-emerald-500 rounded-full cursor-pointer border-none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-/* Controls */
 .controls {
-  @apply flex justify-center items-center gap-4 mb-8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .control-btn {
-  @apply bg-[rgba(255,255,255,0.1)] border border-[rgba(255,255,255,0.2)] rounded-full w-12 h-12 flex items-center justify-center text-[1.2rem] text-white cursor-pointer;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .control-btn:hover {
-  @apply bg-[rgba(255,255,255,0.2)];
+  background: rgba(255, 255, 255, 0.2);
   transform: scale(1.05);
 }
 
 .play-btn {
-  @apply w-14 h-14 text-[1.5rem] bg-emerald-500;
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
+  background: #10b981;
 }
 
 .play-btn:hover {
@@ -152,56 +232,95 @@
 }
 
 .volume-container {
-  @apply flex items-center gap-2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .volume-icon {
-  @apply text-[1.2rem] text-[rgba(255,255,255,0.8)];
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .volume-bar {
-  @apply flex-1 h-1 bg-[rgba(255,255,255,0.2)] rounded cursor-pointer appearance-none outline-none;
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
 }
 
 .volume-bar::-webkit-slider-thumb {
-  @apply appearance-none w-3 h-3 bg-emerald-500 rounded-full cursor-pointer;
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #10b981;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .volume-bar::-moz-range-thumb {
-  @apply w-3 h-3 bg-emerald-500 rounded-full cursor-pointer border-none;
+  width: 12px;
+  height: 12px;
+  background: #10b981;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
 }
 
 .no-track {
-  @apply text-center text-[rgba(255,255,255,0.6)] italic;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
 }
 
-/* Playlist */
+/* Playlist Styles */
 .playlist {
-  @apply bg-[rgba(255,255,255,0.1)] backdrop-blur-xl rounded-3xl p-8 border border-[rgba(255,255,255,0.2)];
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   max-height: 600px;
   overflow-y: auto;
 }
 
 .playlist h2 {
-  @apply text-[1.5rem] font-semibold mb-6 text-white text-center m-0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  color: white;
+  text-align: center;
 }
 
 .empty-playlist {
-  @apply text-center text-[rgba(255,255,255,0.6)] italic;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
 }
 
 .playlist-tracks {
-  @apply flex flex-col gap-2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .playlist-track {
-  @apply flex items-center p-4 bg-[rgba(255,255,255,0.05)] rounded-xl cursor-pointer border border-transparent;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  cursor: pointer;
   transition: all 0.3s ease;
+  border: 1px solid transparent;
 }
 
 .playlist-track:hover {
-  @apply bg-[rgba(255,255,255,0.1)];
+  background: rgba(255, 255, 255, 0.1);
   transform: translateX(5px);
 }
 
@@ -216,92 +335,141 @@
 }
 
 .track-number {
-  @apply w-8 text-center font-semibold text-[rgba(255,255,255,0.8)] text-[1.1rem];
+  width: 2rem;
+  text-align: center;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.1rem;
 }
 
 .track-details {
-  @apply flex-1 ml-4;
+  flex: 1;
+  margin-left: 1rem;
 }
 
 .track-name {
-  @apply font-medium text-white mb-1;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 0.25rem;
 }
 
-.playlist .track-artist {
-  @apply text-[0.9rem] text-[rgba(255,255,255,0.6)];
+.track-artist {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .track-duration {
-  @apply text-[0.9rem] text-[rgba(255,255,255,0.7)] font-medium;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
 }
 
-/* Playlist scrollbar */
+/* Scrollbar Styling */
 .playlist::-webkit-scrollbar {
-  @apply w-1.5;
+  width: 6px;
 }
 
 .playlist::-webkit-scrollbar-track {
-  @apply bg-[rgba(255,255,255,0.1)] rounded;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
 }
 
 .playlist::-webkit-scrollbar-thumb {
-  @apply bg-[rgba(255,255,255,0.3)] rounded;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
 }
 
 .playlist::-webkit-scrollbar-thumb:hover {
-  @apply bg-[rgba(255,255,255,0.5)];
+  background: rgba(255, 255, 255, 0.5);
 }
 
-/* Navbar */
+/* Navbar Styles */
 .navbar {
-  @apply flex justify-between items-center py-4 px-8 mb-8 bg-[rgba(255,255,255,0.1)] backdrop-blur-xl rounded-2xl border border-[rgba(255,255,255,0.2)];
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 1rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .navbar-brand {
-  @apply text-2xl font-bold;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .brand-link {
-  @apply no-underline text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600 bg-[length:200%_200%] bg-clip-text;
-  animation: gradientShift 3s ease-in-out infinite;
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(45deg, #10b981, #059669, #047857);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .navbar-links {
-  @apply flex gap-8;
+  display: flex;
+  gap: 2rem;
 }
 
 .nav-link {
-  @apply no-underline text-[rgba(255,255,255,0.7)] font-medium py-2 px-4 rounded-lg transition-all duration-300;
-}
-
-.nav-link:hover {
-  @apply text-white bg-[rgba(255,255,255,0.1)];
-}
-
-.nav-link.active {
-  @apply text-white;
-}
-
-/* All Songs */
-.all-songs h2 {
-  @apply text-[1.5rem] font-semibold mb-6 text-white text-center m-0;
-}
-
-.empty-message {
-  @apply text-center text-[rgba(255,255,255,0.6)] italic;
-}
-
-.songs-grid {
-  @apply grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4;
-}
-
-.song-card {
-  @apply flex justify-between items-center p-4 bg-[rgba(255,255,255,0.05)] rounded-xl cursor-pointer border border-transparent;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
   transition: all 0.3s ease;
 }
 
+.nav-link:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active {
+  color: white;
+}
+
+/* All Songs Styles */
+.all-songs h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  color: white;
+  text-align: center;
+}
+
+.empty-message {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+.songs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.song-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
 .song-card:hover {
-  @apply bg-[rgba(255,255,255,0.1)];
+  background: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
 }
 
@@ -316,52 +484,85 @@
 }
 
 .song-info {
-  @apply flex-1;
+  flex: 1;
 }
 
 .song-title {
-  @apply font-medium text-white mb-1 text-base m-0;
+  font-weight: 500;
+  color: white;
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
 }
 
 .song-artist {
-  @apply text-[0.9rem] text-[rgba(255,255,255,0.6)] ml-2;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-left: 0.5rem;
 }
 
 .song-duration {
-  @apply text-[0.8rem] text-[rgba(255,255,255,0.7)] font-medium;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
 }
 
 .play-button {
-  @apply text-[1.2rem] text-[rgba(255,255,255,0.8)] ml-4;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-left: 1rem;
 }
 
-/* Playlists page */
+/* Playlists Styles */
 .playlists h2 {
-  @apply text-[1.5rem] font-semibold mb-6 text-white text-center m-0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  color: white;
+  text-align: center;
 }
 
 .create-playlist {
-  @apply mb-8 p-6 bg-[rgba(255,255,255,0.05)] rounded-xl border border-[rgba(255,255,255,0.1)];
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .create-playlist h3 {
-  @apply text-white mb-4 text-[1.1rem] m-0;
+  color: white;
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
 }
 
 .playlist-form {
-  @apply flex gap-4 items-center;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 
 .playlist-input {
-  @apply flex-1 py-3 px-4 border border-[rgba(255,255,255,0.2)] rounded-lg bg-[rgba(255,255,255,0.1)] text-white text-base;
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
 }
 
 .playlist-input::placeholder {
-  @apply text-[rgba(255,255,255,0.5)];
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .create-btn {
-  @apply py-3 px-6 bg-emerald-500 border-none rounded-lg text-white font-semibold cursor-pointer;
+  padding: 0.75rem 1.5rem;
+  background-color: #10b981;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
@@ -372,73 +573,111 @@
 }
 
 .playlists-list {
-  @apply flex flex-col gap-4;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .playlist-item {
-  @apply bg-[rgba(255,255,255,0.05)] rounded-xl p-6 border border-[rgba(255,255,255,0.1)];
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .playlist-header {
-  @apply flex justify-between items-center mb-4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .playlist-name {
-  @apply text-white m-0 text-[1.2rem] font-semibold;
+  color: white;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .playlist-actions {
-  @apply flex gap-2 items-center;
-}
-
-.add-song-btn,
-.delete-playlist-btn {
-  @apply py-2 px-4 border rounded-lg text-white text-[0.9rem] cursor-pointer;
-  transition: all 0.3s ease;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 .add-song-btn {
-  @apply bg-[rgba(16,185,129,0.2)] border-[rgba(16,185,129,0.5)];
+  padding: 0.5rem 1rem;
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  border-radius: 6px;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .add-song-btn:hover {
-  @apply bg-[rgba(16,185,129,0.3)];
+  background: rgba(16, 185, 129, 0.3);
   transform: scale(1.05);
 }
 
 .delete-playlist-btn {
-  @apply bg-[rgba(16,185,129,0.2)] border-[rgba(16,185,129,0.5)];
+  padding: 0.5rem 1rem;
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  border-radius: 6px;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .delete-playlist-btn:hover {
-  @apply bg-[rgba(16,185,129,0.3)];
+  background: rgba(16, 185, 129, 0.3);
   transform: scale(1.05);
 }
 
-/* Add Song Search */
+/* Add Song Search Styles */
 .add-song-section {
-  @apply mb-4;
+  margin-bottom: 1rem;
 }
 
 .search-container {
-  @apply relative w-full;
+  position: relative;
+  width: 100%;
 }
 
 .song-search-input {
-  @apply w-full py-3 px-4 border border-[rgba(255,255,255,0.2)] rounded-lg bg-[rgba(255,255,255,0.1)] text-white text-[0.9rem] outline-none;
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 0.9rem;
+  outline: none;
   transition: all 0.3s ease;
 }
 
 .song-search-input::placeholder {
-  @apply text-[rgba(255,255,255,0.5)];
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .song-search-input:focus {
-  @apply border-[rgba(16,185,129,0.5)] bg-[rgba(255,255,255,0.15)];
+  border-color: rgba(16, 185, 129, 0.5);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .song-dropdown {
-  @apply absolute top-full left-0 right-0 bg-[rgba(0,0,0,0.9)] backdrop-blur-xl border border-[rgba(255,255,255,0.3)] rounded-lg mt-1;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  margin-top: 0.25rem;
   max-height: 200px;
   overflow-y: auto;
   z-index: 10;
@@ -446,37 +685,61 @@
 }
 
 .dropdown-item {
-  @apply py-3 px-4 cursor-pointer border-b border-[rgba(255,255,255,0.2)] flex justify-between items-center text-white;
+  padding: 0.75rem;
+  cursor: pointer;
   transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
 }
 
 .dropdown-item:last-child {
-  @apply border-none;
+  border-bottom: none;
 }
 
 .dropdown-item:hover {
-  @apply bg-[rgba(255,255,255,0.2)];
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .dropdown-item.no-results {
-  @apply text-[rgba(255,255,255,0.6)] italic;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+  cursor: default;
 }
 
 .dropdown-item.no-results:hover {
-  @apply bg-transparent;
+  background: transparent;
 }
 
 .playlist-songs {
-  @apply flex flex-col gap-2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.empty-playlist {
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+  text-align: center;
+  padding: 1rem;
 }
 
 .playlist-song {
-  @apply flex justify-between items-center py-3 px-4 bg-[rgba(255,255,255,0.05)] rounded-lg cursor-pointer border border-transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  cursor: pointer;
   transition: all 0.3s ease;
+  border: 1px solid transparent;
 }
 
 .playlist-song:hover {
-  @apply bg-[rgba(255,255,255,0.1)];
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .playlist-song.active {
@@ -488,14 +751,26 @@
   border-color: rgba(16, 185, 129, 0.5);
 }
 
-/* Modal */
+/* Modal Styles */
 .modal-overlay {
-  @apply fixed inset-0 bg-[rgba(0,0,0,0.7)] flex items-center justify-center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 1000;
 }
 
 .modal {
-  @apply bg-[rgba(255,255,255,0.1)] backdrop-blur-2xl rounded-3xl p-8 border border-[rgba(255,255,255,0.2)];
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   max-width: 500px;
   width: 90%;
@@ -504,38 +779,45 @@
 }
 
 .modal h3 {
-  @apply text-white mb-6 text-center m-0;
+  color: white;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
 }
 
 .songs-list {
-  @apply flex flex-col gap-2 mb-6;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .song-option {
-  @apply flex justify-between items-center py-3 px-4 bg-[rgba(255,255,255,0.05)] rounded-lg cursor-pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .song-option:hover {
-  @apply bg-[rgba(255,255,255,0.1)];
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .close-btn {
-  @apply w-full py-3 px-4 bg-[rgba(255,107,107,0.2)] border border-[rgba(255,107,107,0.5)] rounded-lg text-white font-semibold cursor-pointer;
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(255, 107, 107, 0.2);
+  border: 1px solid rgba(255, 107, 107, 0.5);
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .close-btn:hover {
-  @apply bg-[rgba(255,107,107,0.3)];
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .app-main {
-    @apply grid-cols-1;
-  }
-
-  .app-header h1 {
-    @apply text-[2.5rem];
-  }
+  background: rgba(255, 107, 107, 0.3);
 }

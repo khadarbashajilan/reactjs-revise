@@ -10,7 +10,7 @@ function App() {
     <div className="app">
       {/* NavBar */}
       <main className="app-main">
-        <div className="music-section">
+        <div className="music-player">
           <MusicPlayer />
         </div>
         <div className="content-section">
