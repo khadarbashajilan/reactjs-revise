@@ -9,6 +9,8 @@ export function useMusic() {
   const [currentTime, setcurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  
+  const [volume, setVolume] = useState(0)
 
   function handlePlaySong(song, idx) {
     setcurrentTrack(song);
@@ -63,6 +65,8 @@ export function useMusic() {
     duration,
     currentTrack,
     handlePlaySong,
+    volume,
+    setVolume
   };
 }
 

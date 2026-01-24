@@ -1,17 +1,17 @@
 export const songs = [
   {
     id: 1,
-    title: "My Heart Will Go On",
-    artist: "Celine Dion",
-    url: "/My Heart Will Go On.mp3",
-    duration: "4:35",
-  },
-  {
-    id: 2,
     title: "About You",
     artist: "The 1975",
     url: "/About You.mp3",
     duration: "5:27",
+  },
+  {
+    id: 2,
+    title: "My Heart Will Go On",
+    artist: "Celine Dion",
+    url: "/My Heart Will Go On.mp3",
+    duration: "4:35",
   },
   {
     id: 4,

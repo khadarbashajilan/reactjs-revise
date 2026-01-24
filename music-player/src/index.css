@@ -239,6 +239,7 @@ body {
 
 .volume-icon {
   font-size: 1.2rem;
+  cursor: pointer;
   color: rgba(255, 255, 255, 0.8);
 }
 
