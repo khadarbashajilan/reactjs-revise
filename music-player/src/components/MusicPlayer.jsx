@@ -37,10 +37,10 @@ const MusicPlayer = () => {
       nxtTrack()
     };
 
-    // add comment explaining it :
-    audio.addEventListener("loadedmetadata", handleloadedmetadata);
-    audio.addEventListener("timeupdate", handleTimeupdate);
-    audio.addEventListener("ended", handleEnded);
+       // Set up audio event listeners to update UI when audio events occur
+    audio.addEventListener("loadedmetadata", handleloadedmetadata); // When metadata loads (duration available)
+    audio.addEventListener("timeupdate", handleTimeupdate);       // When playback position changes
+    audio.addEventListener("ended", handleEnded);                 // When track finishes playing
     
     return () => {
       audio.removeEventListener("loadedmetadata", handleloadedmetadata);

@@ -11,7 +11,7 @@ import { MusicProvider } from "./context/MusicContext"; // Use MusicProvider ins
 function App() {
   return (
     <BrowserRouter>
-      <MusicProvider> {/* Use MusicProvider instead of MusicContext.Provider */}
+      <MusicProvider>
       <div className="app">
         <Navbar />
         <main className="app-main">
