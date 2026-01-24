@@ -1,7 +1,8 @@
-import { useMusic } from "../context/useMusic"
+import { useMusicContext } from "../context/MusicContext"
 
 const Allsongs = () => {
-  const {allSongs, currentTrackidx, handlePlaySong} = useMusic()
+
+  const { allSongs, currentTrackidx, handlePlaySong, isPlaying} = useMusicContext()
 
   return (
     <div>
@@ -13,14 +14,13 @@ const Allsongs = () => {
           className={`song-card  ${currentTrackidx === key ? "active": ""}`}
           onClick={()=>handlePlaySong(song, key)}
           >
-
             <div className="song-info">
               <h3 className="song-title">{song.title}</h3>
               <p className="song-artist">{song.artist}</p>
               <p className="song-duration">{song.duration}</p>
             </div>
           <div className="play-button">
-              {currentTrackidx === key ? "♪" : "▶"}
+              {isPlaying === true && currentTrackidx === key ? "♪" : "▶"}
           </div>
           </div>
         ))}
