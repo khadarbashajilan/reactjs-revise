@@ -72,7 +72,10 @@ const MusicPlayer = () => {
   }
 
 const handleVollogo = () => {
-  if (muted || volume === 0) {
+  if(muted && volume != 0 ){
+    setmuted(false)
+  }
+  else if (muted && volume === 0) {
     // If we're muted or at zero, we want sound.
     // If volume was 0, we bump it to 1% so they hear something.
     if (volume === 0) setVolume(0.01); 
@@ -104,6 +107,9 @@ const handleVollogo = () => {
     }
   }, [isPlaying]);
 
+  const progressPercentageSong = duration > 0 ? (currentTime / duration) * 100 : 0;
+  const progressPercentageVol = muted ? 0 : (volume  * 100);
+
   return (
     <div className="music-player">
       <audio
@@ -125,7 +131,7 @@ const handleVollogo = () => {
           step="0.1"
           value={currentTime || 0}
           className="progress-bar"
-          // style={{}}
+          style={{"--progress": `${progressPercentageSong}%`}}
           onChange={(e) => handleTimeChange(e)}
         />
         <span className="time">{formatTime(duration)}</span>
@@ -162,6 +168,7 @@ const handleVollogo = () => {
           step="0.01"
           className="volume-bar"
           onChange={(e) => handleVolumeChange(e)}
+          style={{"--progress": `${progressPercentageVol}%`}}
           value={volume}
         />
       </div>

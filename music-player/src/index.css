@@ -242,7 +242,7 @@ body {
   cursor: pointer;
   color: rgba(255, 255, 255, 0.8);
 }
-
+/* Add this to your CSS */
 .volume-bar {
   flex: 1;
   height: 4px;
@@ -251,8 +251,22 @@ body {
   outline: none;
   cursor: pointer;
   -webkit-appearance: none;
+  appearance: none;
+  position: relative;
 }
 
+/* Volume bar fill effect */
+.volume-bar {
+  background: linear-gradient(
+    to right,
+    #10b981 0%,
+    #10b981 var(--progress, 0%),
+    rgba(255, 255, 255, 0.2) var(--progress, 0%),
+    rgba(255, 255, 255, 0.2) 100%
+  );
+}
+
+/* Volume thumb styling */
 .volume-bar::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 12px;
@@ -260,6 +274,9 @@ body {
   background: #10b981;
   border-radius: 50%;
   cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2;
 }
 
 .volume-bar::-moz-range-thumb {
@@ -269,8 +286,8 @@ body {
   border-radius: 50%;
   cursor: pointer;
   border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
-
 .no-track {
   text-align: center;
   color: rgba(255, 255, 255, 0.6);

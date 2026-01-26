@@ -1,50 +1,91 @@
 /* eslint-disable react-refresh/only-export-components */
 // Import React context tools and our music logic hook
-import { createContext, useContext } from 'react';
-import { useMusic } from './useMusic';
-
+import { createContext, useContext } from "react";
+import { useState } from "react";
+import { songs } from "../../data.js";
 // Create a context to share music data across components
 const MusicContext = createContext();
 
 // Provider component that makes music data available to child components
 export const MusicProvider = ({ children }) => {
-  const music = useMusic(); // Get all music state and functions
-  return (
-    //Makes music data available to all child components
-    // Wraps components with access to the music context 
-    // 'value={music}' provides the actual music data to components 
-    // children will be <App /> in this case
+  const [allSongs, setallsongs] = useState(songs);
+  const [currentTrack, setcurrentTrack] = useState(allSongs[0]);
+  const [currentTrackidx, setcurrentTrackidx] = useState(0);
+  const [currentTime, setcurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-    <MusicContext.Provider value={music}>
+  const [volume, setVolume] = useState(0.2);
+
+  function handlePlaySong(song, idx) {
+    setcurrentTrack(song);
+    setcurrentTrackidx(idx);
+    setIsPlaying((prev) => !prev);
+  }
+
+  const formatTime = (time) => {
+    if (isNaN(time) || time === undefined) return "0:00";
+
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
+
+  const play = () => setIsPlaying(true);
+
+  const pause = () => setIsPlaying(false);
+
+  const nxtTrack = () => {
+    setcurrentTrackidx((prev) => {
+      const nxtIdx = (prev + 1) % allSongs.length;
+      setcurrentTrack(allSongs[nxtIdx]);
+      return nxtIdx;
+    });
+    pause();
+  };
+
+  const prevTrack = () => {
+    setcurrentTrackidx((prev) => {
+      const prevIdx = prev === 0 ? allSongs.length - 1 : prev - 1;
+      setcurrentTrack(allSongs[prevIdx]);
+      return prevIdx;
+    });
+    pause();
+  };
+  return (
+
+    <MusicContext.Provider
+      value={{
+        isPlaying,
+        play,
+        pause,
+        allSongs,
+        currentTrackidx,
+        setcurrentTrack,
+        prevTrack,
+        nxtTrack,
+        currentTime,
+        setDuration,
+        formatTime,
+        setcurrentTime,
+        duration,
+        currentTrack,
+        handlePlaySong,
+        volume,
+        setVolume,
+      }}
+    >
       {children}
     </MusicContext.Provider>
   );
 };
 
 // Custom hook to easily access music context in any component
-export const useMusicContext = () => useContext(MusicContext);
-
-
-// What if I just use useMusic() directly across all components ? :
-
-// Each component would have its own independent instance of the music state
-// This means:
-// 1. No automatic synchronization between components
-// 2. Changes in one component wouldn't update others
-// 3. You'd have multiple separate copies of the music state
-// 4. Memory usage would increase as each component maintains its own state
-
-// Example of the problem:
-// Component A calls useMusic() and plays track 1
-// Component B calls useMusic() and shows track 2
-// If Component A changes to track 3, Component B won't know about it
-
-// This approach would work for:
-// - Very simple apps with minimal state
-// - Components that don't need to share music state
-// - Cases where you want completely separate music players
-
-// For most applications, especially those with shared music playback,
-// using React Context with a custom hook is the recommended approach
-// as it provides a single source of truth for music state
-// and ensures all components see the same data and updates
+export const useMusicContext = () => {
+  const contextValue = useContext(MusicContext)
+  if(!contextValue){
+    throw Error("useMusicContext must be inside the music provider")
+  }
+  return contextValue;
+}
