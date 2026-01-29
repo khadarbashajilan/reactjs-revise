@@ -18,8 +18,8 @@ const Navbar = () => {
           All Songs
         </Link>
         <Link
-        to="/playlist"
-        className={`nav-link ${location.pathname === "/playlist" ? "active"  : ""}`}
+        to="/playlists"
+        className={`nav-link ${location.pathname === "/playlists" ? "active"  : ""}`}
         >
           Playlists
         </Link>

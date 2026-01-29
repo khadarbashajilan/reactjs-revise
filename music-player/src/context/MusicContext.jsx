@@ -15,6 +15,18 @@ export const MusicProvider = ({ children }) => {
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  const [playlists, setPlaylists] = useState([]);
+
+  const createPlaylist = (name) => {
+    const newPlaylist = {
+      id: Date.now(),
+      name,
+      song: [],
+    };
+
+    setPlaylists((prev) => [...prev, newPlaylist]);
+  };
+
   const [volume, setVolume] = useState(0.2);
 
   function handlePlaySong(song, idx) {
@@ -53,8 +65,31 @@ export const MusicProvider = ({ children }) => {
     });
     pause();
   };
-  return (
 
+  // Playlist :
+  const deletePlaylist = (playlistId) => {
+    setPlaylists((prev) =>
+      prev.filter((playlist) => playlist.id != playlistId),
+    );
+  };
+
+const addSongToPlaylist = (playlistId, song) => {
+  setPlaylists((prev) => {
+    return prev.map((playlist) => {
+      if (playlist.id === playlistId) {
+        // Ensure songs array exists, default to empty array if not
+        const currentSongs = playlist.songs || [];
+        return {
+          ...playlist,
+          songs: [...currentSongs, song],
+        };
+      }
+      return playlist;
+    });
+  });
+};
+
+  return (
     <MusicContext.Provider
       value={{
         isPlaying,
@@ -74,6 +109,10 @@ export const MusicProvider = ({ children }) => {
         handlePlaySong,
         volume,
         setVolume,
+        createPlaylist,
+        playlists,
+        deletePlaylist,
+        addSongToPlaylist,
       }}
     >
       {children}
@@ -83,9 +122,9 @@ export const MusicProvider = ({ children }) => {
 
 // Custom hook to easily access music context in any component
 export const useMusicContext = () => {
-  const contextValue = useContext(MusicContext)
-  if(!contextValue){
-    throw Error("useMusicContext must be inside the music provider")
+  const contextValue = useContext(MusicContext);
+  if (!contextValue) {
+    throw Error("useMusicContext must be inside the music provider");
   }
   return contextValue;
-}
+};
