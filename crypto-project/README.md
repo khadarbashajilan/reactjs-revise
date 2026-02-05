@@ -1,66 +1,83 @@
 # 🚀 Crypto Tracker: Real-Time Cryptocurrency Dashboard
 
-A powerful React application that provides real-time cryptocurrency prices, market data, and detailed coin information with automatic 30-second updates.
+A React application tracking cryptocurrency prices with 30-second auto-updates and detailed coin analytics.
 
-## ✨ Features
+## ✨ Key Features
 
-* Real-time cryptocurrency price tracking
-* Detailed coin information pages with price charts
-* Advanced filtering and sorting capabilities
-* Responsive grid and list views
-* Automatic data refresh every 30 seconds
-* Manual refresh functionality
-* Comprehensive market statistics
-* Clean, modern UI with glassmorphism design
+* Real-time price tracking with 30s auto-refresh
+* Detailed coin pages with price charts
+* Advanced filtering and sorting
+* Responsive grid/list views
+* Manual refresh capability
+* Comprehensive market stats
+* Modern glassmorphism UI
 
-## 🛠 Technologies Used
+## 🛠 Tech Stack
 
 ### Frontend
-* React 19
-* TypeScript 5
-* React Query 5
-* Recharts for data visualization
-* React Router 7
+* React 19 + TypeScript 5
+* React Query 5 (data management)
+* Recharts (visualization)
+* React Router 7 (navigation)
 
 ### Backend
-* CoinGecko API for cryptocurrency data
-* Fetch API for data retrieval
+* CoinGecko API (data source)
+* Fetch API (data retrieval)
 
-### Development Tools
-* Vite 7 for build tool
-* ESLint 9 for code quality
-* TypeScript 5 for type checking
-* React Query 5 for data management
+### Development
+* Vite 7 (build tool)
+* ESLint 9 (code quality)
+* TypeScript 5 (type checking)
 
-## 🏗 Application Structure
+## 🏗 Project Structure
 
 ```
 crypto-project/
-├── public/
-│   └── robots.txt
+├── public/          # Static assets
 ├── src/
-│   ├── api/
-│   │   └── coinGecko.ts
-│   ├── components/
-│   │   └── CryptoCard.tsx
-│   ├── lib/
-│   │   └── queryClient.ts
-│   ├── pages/
-│   │   ├── CoinDetails.tsx
-│   │   └── Home.tsx
-│   ├── types/
-│   │   └── dataTypes.ts
-│   ├── utils/
-│   │   ├── formatter.ts
-│   │   └── (other utility files)
-│   ├── App.css
-│   ├── App.tsx
-│   └── main.tsx
-├── .eslintrc.json
-├── .gitignore
-├── package.json
-├── README.md
-├── tsconfig.json
-└── vite.config.ts
+│   ├── api/          # API service
+│   ├── components/   # Reusable UI
+│   ├── lib/          # Core utilities
+│   ├── pages/        # Route components
+│   ├── types/        # Type definitions
+│   ├── utils/        # Helper functions
+│   ├── App.css       # Global styles
+│   ├── App.tsx       # Main app
+│   └── main.tsx      # Entry point
+└── config files      # Project configuration
 ```
 
+## 🔄 Data Flow
+
+1. **Initial Load**:
+   - Components call React Query hooks
+   - Data fetched from CoinGecko API
+   - Processed and cached by React Query
+
+2. **Auto-Refresh**:
+   - React Query updates data every 30s
+   - UI automatically reflects changes
+
+3. **Manual Refresh**:
+   - User triggers refresh via UI
+   - React Query invalidates cache
+   - Fresh data fetched and displayed
+
+## 🚀 Quick Start
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Run development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Build for production:
+   ```bash
+   npm run build
+   ```
+
+Built with React Query for efficient data management and Recharts for beautiful visualizations.
