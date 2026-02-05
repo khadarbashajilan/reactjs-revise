@@ -12,6 +12,11 @@ A React application tracking cryptocurrency prices with 30-second auto-updates a
 * Comprehensive market stats
 * Modern glassmorphism UI
 
+## 🌐 Live Demo
+
+🔗 [Try the live application here](https://crypto-realtime-gamma.vercel.app/)
+
+
 ## 🛠 Tech Stack
 
 ### Frontend
