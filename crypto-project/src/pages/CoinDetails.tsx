@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from "recharts";
 import { formatMarketCap, formatPrice } from "../utils/formatter";
-import { useCoinDetails, useRefreshData } from "../api/coinGecko";
+import { useCoinDetails } from "../api/coinGecko";
 
 
 const CoinDetails = () => {
@@ -18,7 +18,6 @@ const CoinDetails = () => {
 
   // Use React Query hook
   const { data, isLoading, error, refetch } = useCoinDetails(id!);
-  const { refreshCoinDetails } = useRefreshData();
 
   // Format chart data
   const chartData = data?.chart.prices.map((price) => ({
@@ -78,9 +77,6 @@ const CoinDetails = () => {
             </div>
             <div>
 
-            <button onClick={() => refreshCoinDetails(id!)} className="back-button">
-              Refresh
-            </button>
             <button onClick={() => navigate("/")} className="back-button">
               ← Back to List
             </button>

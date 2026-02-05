@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import type { CoinMarketData } from "../types/dataTypes";
 import { CryptoCard } from "../components/CryptoCard";
-import { useCryptos, useRefreshData } from '../api/coinGecko';
+import { useCryptos } from '../api/coinGecko';
 
 const Home = () => {
   // Use React Query hook
   const { data: cryptos, isLoading, error, refetch } = useCryptos();
-  const { refreshCryptos } = useRefreshData();
 
   // Local state for filtering
   const [filteredList, setFilteredList] = useState<CoinMarketData[]>([]);
@@ -108,9 +107,6 @@ const Home = () => {
             onClick={() => setViewMode("list")}
           >
             List
-          </button>
-          <button onClick={refreshCryptos} className="refresh-button">
-            Refresh
           </button>
         </div>
       </div>

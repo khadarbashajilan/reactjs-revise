@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import type { CoinDetails, CoinMarketData } from "../types/dataTypes";
 
 const BASE_URL = "https://api.coingecko.com/api/v3";
@@ -53,19 +53,4 @@ export const useCoinDetails = (id: string) => {
     staleTime: 30000, // Data is fresh for 30 seconds
     enabled: !!id, // Only fetch if id exists
   });
-};
-
-// Manual refresh function
-export const useRefreshData = () => {
-  const queryClient = useQueryClient();
-
-  return {
-
-    refreshCryptos: () =>
-      queryClient.invalidateQueries({ queryKey: ["cryptos"] }),
-
-    refreshCoinDetails: (id: string) =>
-      queryClient.invalidateQueries({ queryKey: ["coinDetails", id] })
-
-  };
 };
